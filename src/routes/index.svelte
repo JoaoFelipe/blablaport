@@ -1,11 +1,16 @@
 <script>
-	import { passportdate, isodate } from './dateutils.js';
-	import { svgToPng, svgToURL } from './downloadsvg.js';
-	import { fundo, fundo2, photo } from './fundo.js';
-	import BottomLine from './BottomLine.svelte';
-    import Info from './Info.svelte';
+	import { passportdate, isodate } from '../utils/dateutils.js';
+	import { svgToPng, svgToURL } from '../utils/downloadsvg.js';
+	import { fundo, fundo2, photo } from '../utils/fundo.js';
+	import BottomLine from '../components/BottomLine.svelte';
+    import Info from '../components/Info.svelte';
 	
-    const urlParams = new URLSearchParams(window.location.search);	
+	let search = "";
+	if (typeof window !== 'undefined') {
+		search = window.location.search;
+	}
+
+    const urlParams = new URLSearchParams(search);	
 
 	let profile = urlParams.get('photo') || photo;
 	let background = urlParams.has('bla')? fundo2 : fundo;
@@ -53,7 +58,7 @@
 	
 	let firstline;
 	let extrafirst;
-	$: firstline = "S<BBL" + surname.replaceAll(" ", "<").toUpperCase() + "<" + name.replaceAll(" ", "<").toUpperCase();
+	$: firstline = "S<BBL" + surname.replace(/ /g, "<").toUpperCase() + "<" + name.replace(/ /g, "<").toUpperCase();
 	let secondline; 
 	$: secondline = number + "<0BBL" + isodate(theexpeditiondate) + "V" + isodate(theexpiredate);
 	let extrasecond;
@@ -88,7 +93,6 @@
 				a.href = pngbin;
 				a.setAttribute("download", "passaporte.png");
 				a.click();
-				//window.location.href = pngbin;
 			},
 			() => {alert('Falha')}
 		);
@@ -101,7 +105,6 @@
 				a.href = svgURL;
 				a.setAttribute("download", "passaporte.svg");
 				a.click();
-				//window.location.href = pngbin;
 			},
 			() => {alert('Falha')}
 		);

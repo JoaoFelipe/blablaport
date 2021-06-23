@@ -1,5 +1,4 @@
 <script>
-	import { beforeUpdate, afterUpdate } from 'svelte';
 	import { tick } from 'svelte';
 
 	export let x;
@@ -21,21 +20,16 @@
 	
 	async function calculateExtra(text, maxwidth) {
 		await tick();
-		if (autoupdate) {
-			let cwidth = element.getBBox().width;
-			let diff = maxwidth - cwidth;
-			quantity = parseInt(diff / 11.8);
+		if (typeof window !== 'undefined') {
+			if (autoupdate) {
+				let cwidth = element.getBBox().width;
+				let diff = maxwidth - cwidth;
+				quantity = parseInt(diff / 11.8);
+			}
+		
+			dx = element.getBBox().width + element.getBBox().x;
 		}
-		dx = element.getBBox().width + element.getBBox().x;
 	}
-	
-	
-	/*afterUpdate(() => {
-		let cwidth = element.getBBox().width;
-		let diff = maxwidth - cwidth;
-		extra = '<'.repeat(parseInt(diff / 11.8));
-		dx = element.getBBox().width + element.getBBox().x;
-	});*/
 </script>
 
 <text x={x} y={y} bind:this={element}
