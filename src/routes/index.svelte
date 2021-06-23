@@ -121,7 +121,7 @@
 
 <style>
 	form {
-		width: 470px;
+		width: 520px;
 	}
 
 	label span {
@@ -151,6 +151,7 @@
 		<label><span title="number">Número:</span> <input bind:value={number}></label>
 		<label><span title="name">Nome:</span> <input bind:value={name}></label>
 		<label><span title="surname">Sobrenome:</span> <input bind:value={surname}></label>
+		<label><span title="nationality">Nacionalidade:</span> <input bind:value={nationality}></label>
 		<label><span title="birthdate">Nascimento:</span> <input type=date bind:value={thebirthdate}></label>
 		<label><span title="birthplace">Naturalidade:</span> <input bind:value={birthplace}></label>
 		<label><span title="expeditiondate">Expedição:</span> <input type=date bind:value={theexpeditiondate}></label>
