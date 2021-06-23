@@ -1,9 +1,9 @@
 <script>
-	import { passportdate, isodate } from '../utils/dateutils.js';
-	import { svgToPng, svgToURL } from '../utils/downloadsvg.js';
-	import { fundo, fundo2, photo } from '../utils/fundo.js';
-	import BottomLine from '../components/BottomLine.svelte';
-    import Info from '../components/Info.svelte';
+	import { passportdate, isodate } from '../lib/dateutils.js';
+	import { svgToPng, svgToURL } from '../lib/downloadsvg.js';
+	import { fundo, fundo2, photo } from '../lib/fundo.js';
+	import BottomLine from '../lib/BottomLine.svelte';
+    import Info from '../lib/Info.svelte';
 	
 	let search = "";
 	if (typeof window !== 'undefined') {
@@ -25,9 +25,11 @@
 	let name = urlParams.get('name') || 'Nome';
 
 	if (urlParams.has('fullname')) {
-		let fullname = urlParams.get('fullname').split(' ', 2)
-		surname = fullname[1];
+		let fullname = urlParams.get('fullname').split(' ')
 		name = fullname[0];
+		fullname.shift();
+		surname = fullname.join(' ');
+		
 	}
 
 	let nationality = urlParams.get('nationality') || 'Brasileira';
